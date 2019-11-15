@@ -46,7 +46,7 @@ def initialize(df, interval):
     
     df, row = resample(df, interval)
     
-    df = laske_tiheys(df, row)
+    df = compute_density(df, row)
     
     print("Your dataframe has been initialized succesfully.")
     
@@ -363,7 +363,7 @@ def space_mean_speed(array):
 # In[ ]:
 
 
-def laske_tiheys(df, row):
+def compute_density(df, row):
     
     a = np.array(df['Flow rate (dir. 1)', 'median'], dtype=float)
     
