@@ -28,7 +28,7 @@ def initialize(df, interval):
     
     except ValueError:
     
-        print("The dataframe is empty")
+        print("The dataframe is empty!")
         
         return df
     
