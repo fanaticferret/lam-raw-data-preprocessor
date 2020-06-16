@@ -20,7 +20,7 @@ import datetime
 # In[ ]:
 
 
-def initialize(df, interval):
+def initialize(df, interval, yr):
     
     try:
     
@@ -38,7 +38,7 @@ def initialize(df, interval):
     
     df.DOY = df.DOY.astype(dtype = 'float32')
     
-    df = create_date(df)
+    df = create_date(df, yr)
     
     df = parse_datetime(df)
     
@@ -124,7 +124,7 @@ def mega_collector():
                      
             second_df = fetch_data(first, last, yr, row2, row6)
                      
-            second_df = initialize(second_df, row5)
+            second_df = initialize(second_df, row5, yr)
             
             if second_df.empty:
                 
@@ -204,11 +204,13 @@ def check_if_leap_year(year):
 # In[ ]:
 
 
-def create_date(df):
+def create_date(df, yr):
     
     d = df['DOY'] - 1
     
-    string = "20{}".format(str(int(float(df.iloc[0, 0]))))
+    # FIX: replaced string with yr
+    
+    # string = "20{}".format(str(int(float(df.iloc[0, 0]))))
     
     date = pd.Series()
     
@@ -216,7 +218,7 @@ def create_date(df):
     
     nampi1 = np.array(td.values)
     
-    nampi2 = np.full(shape = (nampi1.size,), fill_value = np.datetime64('{}-01-01'.format(string)))
+    nampi2 = np.full(shape = (nampi1.size,), fill_value = np.datetime64('{}-01-01'.format(yr)))
     
     nampi2 += nampi1
     
